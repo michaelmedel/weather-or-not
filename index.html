@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Weather or Not</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="weather.css">	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(function() {
+	$('#getTemp').click(function() {
+  $.ajax({
+  url : "http://api.wunderground.com/api/b98f1b432e6cc0d3/geolookup/conditions/q/NY/New_York.json",
+  dataType : "jsonp",
+  success : function(parsed_json) {
+  var location = parsed_json['location']['city'];
+  var temp_f = parsed_json['current_observation']['temp_f'];
+  var conditions = parsed_json['current_observation']['weather'];
+  $('.response').text("Last year in " + location + " the temperature was totally " + temp_f + "F and the conditions were " + conditions + ", so chill dude!");
+  
+  }
+
+})
+  });
+});
+</script>
+</head>
+<body>
+	
+<div class="jumbotron">
+  <h1>Weather or Not</h1>
+  <p>Stop arguing with your friends about what the weather was like a year ago today. Prove it!</p>
+  <p><a class="btn btn-primary btn-lg" id="getTemp" role="button">Get Weather</a></p>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4 temp">
+			<p class="response"></p>
+		</div>
+	</div>
+</div>				
+	
+	
+	
+		
+	
+</body>
+</html>
