@@ -1,9 +1,14 @@
 .jumbotron {
 	text-align: center;
+
+}
+.jumbotron p {
+	font-size: 2em;
 }
 .response {
 	text-align: left;
 	font-size: 2em;
+	color: green;
 }
 .btn-lg {
 	margin-top: 30px;
