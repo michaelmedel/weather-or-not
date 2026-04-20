@@ -28,15 +28,17 @@
     }
 
     button {
-      margin-top: 10px;
-      padding: 10px 16px;
-      border: none;
-      background: #2563eb;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
+    display: block;
+    margin: 10px auto;
+    padding: 10px 16px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
     }
+    
 
     button:hover {
       background: #1e4fd1;
@@ -75,13 +77,27 @@
       border-radius: 10px;
       font-size: 13px;
     }
+    
+    .title {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+    .subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>WeatherOrNot</h1>
-
+    <h1 class="title">Weather or Not</h1>
+    <p class="subtitle">
+  Stop arguing with your friends about what the weather was like a year ago today. Prove it!
+    </p>
     <button onclick="render()">Check Weather</button>
 
     <div class="section" id="today"></div>
