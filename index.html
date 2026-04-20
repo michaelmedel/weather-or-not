@@ -1,43 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Weather or Not</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="weather.css">	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
-$(function() {
-	$('#getTemp').click(function() {
-  $.ajax({
-  url : "http://api.wunderground.com/api/b98f1b432e6cc0d3/geolookup/conditions/q/NY/New_York.json",
-  dataType : "jsonp",
-  success : function(parsed_json) {
-  var location = parsed_json['location']['city'];
-  var temp_f = parsed_json['current_observation']['temp_f'];
-  var conditions = parsed_json['current_observation']['weather'];
-  $('.response').text("Last year in " + location + " the temperature was totally " + temp_f + "F and the conditions were " + conditions + ", so chill dude!");
-  
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WeatherOrNot</title>
 
-})
-  });
-});
-</script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 16px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    }
+    
+
+    button:hover {
+      background: #1e4fd1;
+    }
+
+    .section {
+      margin-top: 20px;
+    }
+
+    .card {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px;
+      border-radius: 10px;
+      background: #f0f4f8;
+      margin-bottom: 10px;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+
+    .summary {
+      margin-top: 15px;
+      padding: 14px;
+      background: #e6f4ea;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .trend {
+      margin-top: 10px;
+      padding: 12px;
+      background: #eef2ff;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+    
+    .title {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+    .subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+  </style>
 </head>
 <body>
-	
-<div class="jumbotron">
-  <h1>Weather or Not</h1>
-  <p>Stop arguing with your friends about what the weather was like a year ago today. Prove it!</p>
-  <p><a class="btn btn-success btn-lg" id="getTemp" role="button">Get Weather</a></p>
-</div>
-<div class="container">
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4 temp">
-			<p class="response"></p>
-		</div>
-	</div>
-</div>				
+
+  <div class="container">
+    <h1 class="title">Weather or Not</h1>
+    <p class="subtitle">
+  Stop arguing with your friends about what the weather was like a year ago today. Prove it!
+    </p>
+    <button onclick="render()">Check Weather</button>
+
+    <div class="section" id="today"></div>
+    <div class="section" id="lastYear"></div>
+
+    <div class="summary" id="summary"></div>
+    <div class="trend" id="trend"></div>
+  </div>
+
+  <script>
+    const data = {
+      today: { max: 9.3, min: -1.5 },
+      lastYear: { max: 6.8, min: 2 }
+    };
+
+    function cToF(c) {
+      return Math.round((c * 9/5) + 32);
+    }
+
+    function getCondition(temp) {
+      if (temp >= 75) return "warm and sunny";
+      if (temp >= 60) return "mild and partly cloudy";
+      if (temp >= 45) return "cool with some clouds";
+      return "cold and brisk";
+    }
+
+    function getTrend(today, lastYear) {
+      const highDiff = today.high - lastYear.high;
+      const lowDiff = today.low - lastYear.low;
+
+      let tempTrend = "";
+      if (highDiff > 3) tempTrend = "warmer than last year";
+      else if (highDiff < -3) tempTrend = "colder than last year";
+      else tempTrend = "about the same as last year";
+
+      const swingToday = today.high - today.low;
+      const swingLast = lastYear.high - lastYear.low;
+
+      let swingTrend = swingToday > swingLast
+        ? "bigger temperature swings today"
+        : "more stable temperatures today";
+
+      return `Overall it's ${tempTrend}, with ${swingTrend}.`;
+    }
+
+    function getDescription(today, lastYear) {
+      const diff = today.high - lastYear.high;
+
+      let comparison;
+      if (diff > 5) comparison = "noticeably warmer";
+      else if (diff > 0) comparison = "a bit warmer";
+      else if (diff < -5) comparison = "quite a bit colder";
+      else if (diff < 0) comparison = "a little colder";
+      else comparison = "about the same";
+
+      return `Last year was around ${lastYear.high}°F and ${lastYear.condition}, but today is ${today.high}°F and ${today.condition} — so it's ${comparison} overall.`;
+    }
+
+    function formatData(data) {
+      return {
+        today: {
+          high: cToF(data.today.max),
+          low: cToF(data.today.min),
+          condition: getCondition(cToF(data.today.max))
+        },
+        lastYear: {
+          high: cToF(data.lastYear.max),
+          low: cToF(data.lastYear.min),
+          condition: getCondition(cToF(data.lastYear.max))
+        }
+      };
+    }
+
+    function render() {
+      const formatted = formatData(data);
+
+      document.getElementById("today").innerHTML = `
+        <h3>Today</h3>
+        <div class="card">
+          <div><span class="label">High:</span> ${formatted.today.high}°F</div>
+          <div><span class="label">Low:</span> ${formatted.today.low}°F</div>
+        </div>
+      `;
+
+      document.getElementById("lastYear").innerHTML = `
+        <h3>Last Year</h3>
+        <div class="card">
+          <div><span class="label">High:</span> ${formatted.lastYear.high}°F</div>
+          <div><span class="label">Low:</span> ${formatted.lastYear.low}°F</div>
+        </div>
+      `;
+
+      document.getElementById("summary").innerText =
+        getDescription(formatted.today, formatted.lastYear);
+
+      document.getElementById("trend").innerText =
+        getTrend(formatted.today, formatted.lastYear);
+    }
+  </script>
+
 </body>
 </html>
