@@ -28,20 +28,27 @@
     }
 
     button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 16px;
-    border: none;
-    background: #2563eb;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
+      display: block;
+      margin: 10px auto;
+      padding: 10px 16px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
     }
-    
 
     button:hover {
       background: #1e4fd1;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
     }
 
     .section {
@@ -77,18 +84,18 @@
       border-radius: 10px;
       font-size: 13px;
     }
-    
+
     .title {
-  text-align: center;
-  margin-bottom: 5px;
-}
+      text-align: center;
+      margin-bottom: 5px;
+    }
 
     .subtitle {
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 20px;
-}
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
@@ -96,8 +103,10 @@
   <div class="container">
     <h1 class="title">Weather or Not</h1>
     <p class="subtitle">
-  Stop arguing with your friends about what the weather was like a year ago today. Prove it!
+      Stop arguing with your friends about what the weather was like a year ago today. Prove it!
     </p>
+
+    <input id="locationInput" placeholder="Enter city (e.g. New York)" />
     <button onclick="render()">Check Weather</button>
 
     <div class="section" id="today"></div>
@@ -108,11 +117,6 @@
   </div>
 
   <script>
-    const data = {
-      today: { max: 9.3, min: -1.5 },
-      lastYear: { max: 6.8, min: 2 }
-    };
-
     function cToF(c) {
       return Math.round((c * 9/5) + 32);
     }
@@ -171,11 +175,53 @@
       };
     }
 
-    function render() {
+    async function render() {
+      const input = document.getElementById("locationInput");
+      const location = input.value || "New York";
+
+      const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`);
+      const geoData = await geoRes.json();
+
+      if (!geoData.results) {
+        alert("Location not found");
+        return;
+      }
+
+      const { latitude, longitude, name, country } = geoData.results[0];
+
+      const today = new Date();
+      const lastYear = new Date();
+      lastYear.setFullYear(today.getFullYear() - 1);
+
+      const formatDate = d => d.toISOString().split("T")[0];
+
+      // Today (real-time forecast)
+      const todayRes = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`
+      );
+      const todayData = await todayRes.json();
+
+      // Last year (historical)
+      const lastYearRes = await fetch(
+        `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${formatDate(lastYear)}&end_date=${formatDate(lastYear)}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`
+      );
+      const lastYearData = await lastYearRes.json();
+
+      const data = {
+        today: {
+          max: todayData.daily.temperature_2m_max[0],
+          min: todayData.daily.temperature_2m_min[0]
+        },
+        lastYear: {
+          max: lastYearData.daily.temperature_2m_max[0],
+          min: lastYearData.daily.temperature_2m_min[0]
+        }
+      };
+
       const formatted = formatData(data);
 
       document.getElementById("today").innerHTML = `
-        <h3>Today</h3>
+        <h3>Today (${name}, ${country})</h3>
         <div class="card">
           <div><span class="label">High:</span> ${formatted.today.high}°F</div>
           <div><span class="label">Low:</span> ${formatted.today.low}°F</div>
