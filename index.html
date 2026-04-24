@@ -3,7 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Year-Ago Weather</title>
+
+  <!-- SEO -->
+  <title>Weather a Year Ago Today | Year-Ago Weather</title>
+  <meta name="description" content="Check what the weather was like exactly one year ago today for any city. Compare today's weather vs last year instantly.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Year-Ago Weather">
+  <meta property="og:description" content="See what the weather was like a year ago today.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yearagoweather.com">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Year-Ago Weather",
+    "url": "https://yearagoweather.com"
+  }
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+       crossorigin="anonymous"></script>
 
   <style>
     body {
@@ -11,6 +34,7 @@
       background: #f5f7fa;
       margin: 0;
       padding: 20px;
+      padding-bottom: 120px;
       color: #333;
     }
 
@@ -18,231 +42,235 @@
       max-width: 600px;
       margin: auto;
       background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    .brand {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #2563eb;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
     }
 
     h1 {
-      margin-bottom: 10px;
-    }
-
-    button {
-      display: block;
-      margin: 10px auto;
-      padding: 10px 16px;
-      border: none;
-      background: #2563eb;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    button:hover {
-      background: #1e4fd1;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      margin-bottom: 10px;
-    }
-
-    .section {
-      margin-top: 20px;
-    }
-
-    .card {
-      display: flex;
-      justify-content: space-between;
-      padding: 14px;
-      border-radius: 10px;
-      background: #f0f4f8;
-      margin-bottom: 10px;
-    }
-
-    .label {
-      font-weight: bold;
-    }
-
-    .summary {
-      margin-top: 15px;
-      padding: 14px;
-      background: #e6f4ea;
-      border-radius: 10px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .trend {
-      margin-top: 10px;
-      padding: 12px;
-      background: #eef2ff;
-      border-radius: 10px;
-      font-size: 13px;
-    }
-
-    .title {
       text-align: center;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
 
     .subtitle {
       text-align: center;
       font-size: 14px;
       color: #555;
+      margin-bottom: 10px;
+    }
+
+    .seo-text {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
       margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    button {
+      display: block;
+      margin: 10px auto;
+      padding: 12px 18px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: #1e4fd1;
+    }
+
+    .card {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px;
+      border-radius: 12px;
+      background: #f0f4f8;
+      margin-bottom: 10px;
+    }
+
+    .summary {
+      margin-top: 15px;
+      padding: 14px;
+      background: #e6f4ea;
+      border-radius: 12px;
+    }
+
+    .trend {
+      margin-top: 10px;
+      padding: 12px;
+      background: #eef2ff;
+      border-radius: 12px;
+    }
+
+    .ad-inline {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .bottom-ad {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      background: white;
+      border-top: 1px solid #eee;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1 class="title">Year-Ago Weather</h1>
-    <p class="subtitle">
-      Stop arguing with your friends about what the weather was like a year ago today. Prove it!
-    </p>
+<div class="container">
+  <div class="brand">Year-Ago Weather</div>
 
-    <input id="locationInput" placeholder="Enter city (e.g. New York)" />
-    <button onclick="render()">Check Weather</button>
+  <h1>What Was the Weather Like a Year Ago Today?</h1>
 
-    <div class="section" id="today"></div>
-    <div class="section" id="lastYear"></div>
+  <p class="subtitle">
+    Compare today's weather with the same day last year.
+  </p>
 
-    <div class="summary" id="summary"></div>
-    <div class="trend" id="trend"></div>
+  <p class="seo-text">
+    Enter any city to instantly see historical weather data and compare temperatures.
+  </p>
+
+  <!-- Top Ad -->
+  <div class="ad-inline">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXX"
+         data-ad-slot="TOP_SLOT"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
   </div>
 
-  <script>
-    function cToF(c) {
-      return Math.round((c * 9/5) + 32);
+  <input id="locationInput" placeholder="Enter city (e.g. New York)" />
+  <button onclick="render()">Check Weather</button>
+
+  <div id="today"></div>
+  <div id="lastYear"></div>
+
+  <div class="summary" id="summary"></div>
+  <div class="trend" id="trend"></div>
+
+  <!-- Mid Ad -->
+  <div class="ad-inline">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXX"
+         data-ad-slot="MID_SLOT"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+</div>
+
+<!-- Bottom Ad -->
+<div class="bottom-ad">
+  <ins class="adsbygoogle"
+       style="display:block;width:100%;height:90px"
+       data-ad-client="ca-pub-XXXXXXXXXXXX"
+       data-ad-slot="BOTTOM_SLOT"></ins>
+</div>
+
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  (adsbygoogle = window.adsbygoogle || []).push({});
+
+  const params = new URLSearchParams(window.location.search);
+  const defaultCity = params.get("city") || "New York";
+  document.getElementById("locationInput").value = defaultCity;
+
+  function cToF(c) {
+    return Math.round((c * 9/5) + 32);
+  }
+
+  async function render() {
+    const location = document.getElementById("locationInput").value;
+
+    const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`);
+    const geoData = await geoRes.json();
+
+    if (!geoData.results) {
+      alert("Location not found");
+      return;
     }
 
-    function getCondition(temp) {
-      if (temp >= 75) return "warm and sunny";
-      if (temp >= 60) return "mild and partly cloudy";
-      if (temp >= 45) return "cool with some clouds";
-      return "cold and brisk";
-    }
+    const { latitude, longitude, name, country } = geoData.results[0];
 
-    function getTrend(today, lastYear) {
-      const highDiff = today.high - lastYear.high;
-      const lowDiff = today.low - lastYear.low;
+    document.title = `Weather in ${name} – Today vs Last Year | Year-Ago Weather`;
 
-      let tempTrend = "";
-      if (highDiff > 3) tempTrend = "warmer than last year";
-      else if (highDiff < -3) tempTrend = "colder than last year";
-      else tempTrend = "about the same as last year";
+    const today = new Date();
+    const lastYear = new Date();
+    lastYear.setFullYear(today.getFullYear() - 1);
 
-      const swingToday = today.high - today.low;
-      const swingLast = lastYear.high - lastYear.low;
+    const formatDate = d => d.toISOString().split("T")[0];
 
-      let swingTrend = swingToday > swingLast
-        ? "bigger temperature swings today"
-        : "more stable temperatures today";
+    const todayRes = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`
+    );
+    const todayData = await todayRes.json();
 
-      return `Overall it's ${tempTrend}, with ${swingTrend}.`;
-    }
+    const lastYearRes = await fetch(
+      `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${formatDate(lastYear)}&end_date=${formatDate(lastYear)}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`
+    );
+    const lastYearData = await lastYearRes.json();
 
-    function getDescription(today, lastYear) {
-      const diff = today.high - lastYear.high;
+    const todayHigh = cToF(todayData.daily.temperature_2m_max[0]);
+    const todayLow = cToF(todayData.daily.temperature_2m_min[0]);
+    const lastHigh = cToF(lastYearData.daily.temperature_2m_max[0]);
+    const lastLow = cToF(lastYearData.daily.temperature_2m_min[0]);
 
-      let comparison;
-      if (diff > 5) comparison = "noticeably warmer";
-      else if (diff > 0) comparison = "a bit warmer";
-      else if (diff < -5) comparison = "quite a bit colder";
-      else if (diff < 0) comparison = "a little colder";
-      else comparison = "about the same";
+    document.getElementById("today").innerHTML = `
+      <h3>Today (${name}, ${country})</h3>
+      <div class="card">
+        <div>High: ${todayHigh}°F</div>
+        <div>Low: ${todayLow}°F</div>
+      </div>
+    `;
 
-      return `Last year was around ${lastYear.high}°F and ${lastYear.condition}, but today is ${today.high}°F and ${today.condition} — so it's ${comparison} overall.`;
-    }
+    document.getElementById("lastYear").innerHTML = `
+      <h3>Last Year</h3>
+      <div class="card">
+        <div>High: ${lastHigh}°F</div>
+        <div>Low: ${lastLow}°F</div>
+      </div>
+    `;
 
-    function formatData(data) {
-      return {
-        today: {
-          high: cToF(data.today.max),
-          low: cToF(data.today.min),
-          condition: getCondition(cToF(data.today.max))
-        },
-        lastYear: {
-          high: cToF(data.lastYear.max),
-          low: cToF(data.lastYear.min),
-          condition: getCondition(cToF(data.lastYear.max))
-        }
-      };
-    }
+    document.getElementById("summary").innerText =
+      `Last year was ${lastHigh}°F, today is ${todayHigh}°F.`;
 
-    async function render() {
-      const input = document.getElementById("locationInput");
-      const location = input.value || "New York";
+    document.getElementById("trend").innerText =
+      todayHigh > lastHigh ? "It's warmer than last year." : "It's cooler than last year.";
+  }
 
-      const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`);
-      const geoData = await geoRes.json();
-
-      if (!geoData.results) {
-        alert("Location not found");
-        return;
-      }
-
-      const { latitude, longitude, name, country } = geoData.results[0];
-
-      const today = new Date();
-      const lastYear = new Date();
-      lastYear.setFullYear(today.getFullYear() - 1);
-
-      const formatDate = d => d.toISOString().split("T")[0];
-
-      // Today (real-time forecast)
-      const todayRes = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`
-      );
-      const todayData = await todayRes.json();
-
-      // Last year (historical)
-      const lastYearRes = await fetch(
-        `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${formatDate(lastYear)}&end_date=${formatDate(lastYear)}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`
-      );
-      const lastYearData = await lastYearRes.json();
-
-      const data = {
-        today: {
-          max: todayData.daily.temperature_2m_max[0],
-          min: todayData.daily.temperature_2m_min[0]
-        },
-        lastYear: {
-          max: lastYearData.daily.temperature_2m_max[0],
-          min: lastYearData.daily.temperature_2m_min[0]
-        }
-      };
-
-      const formatted = formatData(data);
-
-      document.getElementById("today").innerHTML = `
-        <h3>Today (${name}, ${country})</h3>
-        <div class="card">
-          <div><span class="label">High:</span> ${formatted.today.high}°F</div>
-          <div><span class="label">Low:</span> ${formatted.today.low}°F</div>
-        </div>
-      `;
-
-      document.getElementById("lastYear").innerHTML = `
-        <h3>Last Year</h3>
-        <div class="card">
-          <div><span class="label">High:</span> ${formatted.lastYear.high}°F</div>
-          <div><span class="label">Low:</span> ${formatted.lastYear.low}°F</div>
-        </div>
-      `;
-
-      document.getElementById("summary").innerText =
-        getDescription(formatted.today, formatted.lastYear);
-
-      document.getElementById("trend").innerText =
-        getTrend(formatted.today, formatted.lastYear);
-    }
-  </script>
+  render();
+</script>
 
 </body>
 </html>
