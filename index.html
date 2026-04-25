@@ -209,7 +209,13 @@ async function render(){
   const location = document.getElementById("locationInput").value;
 
   const geo = await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`)).json();
-  if(!geo.results){ alert("Not found"); return; }
+
+  if(!geo.results){
+    document.getElementById("summary").innerText = "Location not found. Try a larger city.";
+    document.getElementById("today").innerHTML = "";
+    document.getElementById("lastYear").innerHTML = "";
+    return;
+  }
 
   const best = geo.results.find(r=>r.country_code==="US") || geo.results[0];
 
@@ -262,7 +268,8 @@ async function render(){
     th > lh ? "Warmer than last year 🔥" : "Colder than last year ❄️";
 }
 
-render();
+// no auto render
+
 </script>
 
 </body>
