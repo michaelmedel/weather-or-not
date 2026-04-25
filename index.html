@@ -4,129 +4,104 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <!-- SEO -->
   <title>Weather a Year Ago Today | Year-Ago Weather</title>
   <meta name="description" content="Check what the weather was like exactly one year ago today for any city. Compare today's weather vs last year instantly.">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Year-Ago Weather">
-  <meta property="og:description" content="See what the weather was like a year ago today.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yearagoweather.com">
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Year-Ago Weather",
-    "url": "https://yearagoweather.com"
-  }
-  </script>
-
   <!-- AdSense -->
- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4887816076249556"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX"
+       crossorigin="anonymous"></script>
 
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: #f5f7fa;
       margin: 0;
-      padding: 20px;
-      padding-bottom: 120px;
-      color: #333;
+      padding: 16px;
+      padding-bottom: 110px;
+      color: #111;
     }
 
     .container {
-      max-width: 600px;
+      max-width: 520px;
       margin: auto;
+    }
+
+    .card-ui {
       background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     }
 
     .brand {
       text-align: center;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       color: #2563eb;
       margin-bottom: 6px;
-      letter-spacing: 0.5px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 8px;
+      font-size: 22px;
+      margin-bottom: 10px;
     }
 
     .subtitle {
       text-align: center;
       font-size: 14px;
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .seo-text {
-      text-align: center;
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
     }
 
     input {
       width: 100%;
-      padding: 12px;
-      border-radius: 10px;
+      padding: 14px;
+      border-radius: 12px;
       border: 1px solid #ddd;
       margin-bottom: 12px;
-      font-size: 14px;
+      font-size: 15px;
     }
 
     button {
-      display: block;
-      margin: 10px auto;
-      padding: 12px 18px;
+      width: 100%;
+      padding: 14px;
       border: none;
       background: #2563eb;
       color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 15px;
+      border-radius: 12px;
+      font-size: 16px;
       font-weight: 600;
     }
 
-    button:hover {
-      background: #1e4fd1;
-    }
-
-    .card {
-      display: flex;
-      justify-content: space-between;
-      padding: 16px;
-      border-radius: 12px;
+    .weather-box {
       background: #f0f4f8;
-      margin-bottom: 10px;
+      padding: 16px;
+      border-radius: 14px;
+      margin-top: 12px;
     }
 
     .summary {
-      margin-top: 15px;
+      margin-top: 14px;
       padding: 14px;
       background: #e6f4ea;
-      border-radius: 12px;
+      border-radius: 14px;
+      font-size: 14px;
     }
 
     .trend {
       margin-top: 10px;
       padding: 12px;
       background: #eef2ff;
-      border-radius: 12px;
+      border-radius: 14px;
+      font-size: 13px;
     }
 
-    .ad-inline {
-      margin: 20px 0;
-      text-align: center;
+    .footer {
+      text-align:center;
+      font-size:12px;
+      margin-top:20px;
+      color:#666;
     }
 
     .bottom-ad {
@@ -135,64 +110,45 @@
       left: 0;
       width: 100%;
       height: 90px;
-      background: white;
+      background: #f5f7fa;
       border-top: 1px solid #eee;
-      z-index: 9999;
       display: flex;
       justify-content: center;
       align-items: center;
     }
   </style>
 </head>
+
 <body>
 
 <div class="container">
-  <div class="brand">Year-Ago Weather</div>
+  <div class="card-ui">
 
-  <h1>What Was the Weather Like a Year Ago Today?</h1>
+    <div class="brand">Year-Ago Weather</div>
 
-  <p class="subtitle">
-    Compare today's weather with the same day last year.
-  </p>
+    <h1>What Was the Weather Like a Year Ago Today?</h1>
 
-  <p class="seo-text">
-    Enter any city to instantly see historical weather data and compare temperatures.
-  </p>
-  <p style="font-size:13px; color:#666; text-align:center;">
-This site uses historical weather data from trusted sources to compare today's conditions with the same day last year.
-</p>
+    <p class="subtitle">
+      Stop arguing with your friends about what the weather was like a year ago today. Prove it!
+    </p>
 
-  <!-- Top Ad -->
-  <div class="ad-inline">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-XXXXXXXXXXXX"
-         data-ad-slot="TOP_SLOT"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-  </div>
+    <input id="locationInput" placeholder="Enter city (e.g. New York)" />
+    <button onclick="render()">Check Weather</button>
 
-  <input id="locationInput" placeholder="Enter city (e.g. New York)" />
-  <button onclick="render()">Check Weather</button>
+    <div id="today"></div>
+    <div id="lastYear"></div>
 
-  <div id="today"></div>
-  <div id="lastYear"></div>
+    <div class="summary" id="summary"></div>
+    <div class="trend" id="trend"></div>
 
-  <div class="summary" id="summary"></div>
-  <div class="trend" id="trend"></div>
+    <div class="footer">
+      <a href="/about.html">About</a> |
+      <a href="/privacy.html">Privacy</a>
+    </div>
 
-  <!-- Mid Ad -->
-  <div class="ad-inline">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-XXXXXXXXXXXX"
-         data-ad-slot="MID_SLOT"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
   </div>
 </div>
 
-<!-- Bottom Ad -->
 <div class="bottom-ad">
   <ins class="adsbygoogle"
        style="display:block;width:100%;height:90px"
@@ -201,82 +157,78 @@ This site uses historical weather data from trusted sources to compare today's c
 </div>
 
 <script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-  (adsbygoogle = window.adsbygoogle || []).push({});
-  (adsbygoogle = window.adsbygoogle || []).push({});
+(adsbygoogle = window.adsbygoogle || []).push({});
 
-  const params = new URLSearchParams(window.location.search);
-  const defaultCity = params.get("city") || "New York";
-  document.getElementById("locationInput").value = defaultCity;
+const params = new URLSearchParams(window.location.search);
+document.getElementById("locationInput").value = params.get("city") || "New York";
 
-  function cToF(c) {
-    return Math.round((c * 9/5) + 32);
-  }
+function cToF(c){ return Math.round((c * 9/5) + 32); }
 
-  async function render() {
-    const location = document.getElementById("locationInput").value;
+function getWeatherDescription(code){
+  const map = {
+    0:"clear skies",1:"mainly clear",2:"partly cloudy",3:"overcast",
+    45:"foggy",61:"light rain",63:"rain",65:"heavy rain",
+    71:"snow",80:"rain showers",95:"thunderstorms"
+  };
+  return map[code] || "mixed conditions";
+}
 
-    const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`);
-    const geoData = await geoRes.json();
+async function render(){
+  const location = document.getElementById("locationInput").value;
 
-    if (!geoData.results) {
-      alert("Location not found");
-      return;
-    }
+  const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`);
+  const geoData = await geoRes.json();
 
-    const { latitude, longitude, name, country } = geoData.results[0];
+  if(!geoData.results){ alert("Location not found"); return; }
 
-    document.title = `Weather in ${name} – Today vs Last Year | Year-Ago Weather`;
+  const results = geoData.results;
+  const best = results.find(r=>r.country_code==="US") || results[0];
 
-    const today = new Date();
-    const lastYear = new Date();
-    lastYear.setFullYear(today.getFullYear() - 1);
+  const { latitude, longitude, name, country } = best;
 
-    const formatDate = d => d.toISOString().split("T")[0];
+  const today = new Date();
+  const lastYear = new Date();
+  lastYear.setFullYear(today.getFullYear()-1);
 
-    const todayRes = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`
-    );
-    const todayData = await todayRes.json();
+  const formatDate = d=>d.toISOString().split("T")[0];
 
-    const lastYearRes = await fetch(
-      `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${formatDate(lastYear)}&end_date=${formatDate(lastYear)}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`
-    );
-    const lastYearData = await lastYearRes.json();
+  const todayData = await (await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto`
+  )).json();
 
-    const todayHigh = cToF(todayData.daily.temperature_2m_max[0]);
-    const todayLow = cToF(todayData.daily.temperature_2m_min[0]);
-    const lastHigh = cToF(lastYearData.daily.temperature_2m_max[0]);
-    const lastLow = cToF(lastYearData.daily.temperature_2m_min[0]);
+  const lastYearData = await (await fetch(
+    `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${formatDate(lastYear)}&end_date=${formatDate(lastYear)}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto`
+  )).json();
 
-    document.getElementById("today").innerHTML = `
-      <h3>Today (${name}, ${country})</h3>
-      <div class="card">
-        <div>High: ${todayHigh}°F</div>
-        <div>Low: ${todayLow}°F</div>
-      </div>
-    `;
+  const todayHigh = cToF(todayData.daily.temperature_2m_max[0]);
+  const todayLow = cToF(todayData.daily.temperature_2m_min[0]);
+  const todayCond = getWeatherDescription(todayData.daily.weathercode[0]);
 
-    document.getElementById("lastYear").innerHTML = `
-      <h3>Last Year</h3>
-      <div class="card">
-        <div>High: ${lastHigh}°F</div>
-        <div>Low: ${lastLow}°F</div>
-      </div>
-    `;
+  const lastHigh = cToF(lastYearData.daily.temperature_2m_max[0]);
+  const lastLow = cToF(lastYearData.daily.temperature_2m_min[0]);
+  const lastCond = getWeatherDescription(lastYearData.daily.weathercode[0]);
 
-    document.getElementById("summary").innerText =
-      `Last year was ${lastHigh}°F, today is ${todayHigh}°F.`;
+  document.getElementById("today").innerHTML = `
+    <div class="weather-box">
+      <strong>Today (${name})</strong><br>
+      ${todayHigh}° / ${todayLow}° — ${todayCond}
+    </div>`;
 
-    document.getElementById("trend").innerText =
-      todayHigh > lastHigh ? "It's warmer than last year." : "It's cooler than last year.";
-  }
+  document.getElementById("lastYear").innerHTML = `
+    <div class="weather-box">
+      <strong>Last Year</strong><br>
+      ${lastHigh}° / ${lastLow}° — ${lastCond}
+    </div>`;
 
-  render();
+  document.getElementById("summary").innerText =
+    `Last year felt ${lastCond} at ${lastHigh}°, today is ${todayCond} at ${todayHigh}°.`;
+
+  document.getElementById("trend").innerText =
+    todayHigh > lastHigh ? "Warmer than last year 🔥" : "Colder than last year ❄️";
+}
+
+render();
 </script>
-<div style="text-align:center; font-size:12px; margin-top:20px;">
-  <a href="/about.html">About</a> |
-  <a href="/privacy.html">Privacy</a>
-</div>
+
 </body>
 </html>
